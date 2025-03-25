@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HonestBET - O Site mais honesto do Brasil</title>
+    <style>
+        :root {
+            --primary: #eb770a;
+            --secondary: #1e1e2d;
+            --accent: #ffbb00;
+            --background: #0f0f1a;
+            --text: #ffffff;
+            --card-bg: #1a1a2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styling */
+        header {
+            background-color: var(--secondary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-img img {
+            max-width: 80px;
+            /* Adicionado para limitar o tamanho da imagem */
+            max-height: 80px;
+            /* Adicionado para limitar o tamanho da imagem */
+            width: auto;
+            /* Garante que a largura se ajuste proporcionalmente */
+            height: auto;
+            /* Garante que a altura se ajuste proporcionalmente */
+            border-radius: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary), var(--background));
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .cta-buttons .btn {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+        }
+
+        /* Game categories */
+        .game-categories {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-img {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .category-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--card-bg));
+        }
+
+        .category-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* Featured games */
+        .featured-games {
+            padding: 60px 0;
+            background-color: var(--secondary);
+        }
+
+        .games-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .games-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .game-card {
+            flex: 0 0 300px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            scroll-snap-align: start;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .game-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover .game-overlay {
+            opacity: 1;
+        }
+
+        .game-content {
+            padding: 15px;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--accent);
+        }
+
+        .game-provider {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .play-now {
+            display: block;
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .play-now:hover {
+            background-color: #ff6600;
+        }
+
+        /* Promotions section */
+        .promotions {
+            padding: 60px 0;
+        }
+
+        .promo-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .promo-card {
+            background: linear-gradient(145deg, var(--card-bg), var(--secondary));
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .promo-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .promo-content {
+            padding: 20px;
+        }
+
+        .promo-title {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .promo-desc {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .claim-btn {
+            background-color: var(--accent);
+            color: var(--secondary);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .claim-btn:hover {
+            background-color: #ffd000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Payment methods */
+        .payment-methods {
+            padding: 60px 0;
+            background-color: var(--secondary);
+        }
+
+        .methods-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .payment-icon {
+            width: 80px;
+            height: 50px;
+            background-color: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .payment-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+
+        /* Chat support */
+        .chat-support {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Media queries */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animation keyframes */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Login modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #252538;
+            color: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #e56b00;
+        }
+
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login-title {
+            position: relative;
+            margin-bottom: 15px;
+            color: #999;
+        }
+
+        .social-login-title::before,
+        .social-login-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #444;
+        }
+
+        .social-login-title::before {
+            left: 0;
+        }
+
+        .social-login-title::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="imagens/logo.png" alt="TigerBets Logo" />
+                </div>
+                <span>HonestBET</span>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#" class="active">Início</a>
+                <a href="#">Cassino</a>
+                <a href="#">Ao Vivo</a>
+                <a href="#">Slots</a>
+                <a href="#">Promoções</a>
+                <a href="#">VIP</a>
+            </nav>
+
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="openModal('login-modal')">Entrar</button>
+                <button class="btn btn-primary" onclick="openModal('register-modal')">Cadastrar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Entre na Aventura com HonestBET</h1>
+                <p>Descubra a emoção de jogar nos melhores jogos de cassino online com gráficos impressionantes e
+                    prêmios incríveis. Junte-se a nós hoje e receba um bônus de boas-vindas de até R$2.000!</p>
+            </div>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Jogar Agora</button>
+                <button class="btn btn-secondary">Conhecer Jogos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Categories -->
+    <section class="game-categories">
+        <div class="container">
+            <h2 class="section-title">Categorias de Jogos</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-img" style="background-image: url('imagens/slots.jpg')"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Slots</h3>
+                        <p>Mais de 1000 caça-níqueis emocionantes</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-image: url('imagens/cassino.webp')"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Cassino ao Vivo</h3>
+                        <p>Jogue com dealers reais em tempo real</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-image: url('imagens/Roleta.jpeg')"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Roleta</h3>
+                        <p>Todas as variantes de roleta em um só lugar</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-image: url('imagens/Blackjack.png')"></div>
+                    <div class="category-content">
+                        <h3 class="category-title">Blackjack</h3>
+                        <p>Desafie a sorte nas mesas de 21</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Games -->
+    <section class="featured-games">
+        <div class="container">
+            <h2 class="section-title">Jogos em Destaque</h2>
+            <div class="games-carousel">
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('imagens/Fortuneiger.jfif')">
+                        <div class="game-overlay">
+                            <a href="test.html" class="btn btn-primary">Jogar</a>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Fortune Tiger</h3>
+                        <p class="game-provider">PG Soft</p>
+                        <button class="play-now">Jogar Agora</button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('imagens/GoldenDragon.jfif')">
+                        <div class="game-overlay">
+                            <button class="btn btn-primary">Jogar</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">8 Golden Dragon</h3>
+                        <p class="game-provider">PG Soft</p>
+                        <button class="play-now">Jogar Agora</button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('imagens/CandyWild.webp')">
+                        <div class="game-overlay">
+                            <button class="btn btn-primary">Jogar</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Candy Wild Bonanza</h3>
+                        <p class="game-provider">PG Soft</p>
+                        <button class="play-now">Jogar Agora</button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('imagens/LuckyFortunes.webp')">
+                        <div class="game-overlay">
+                            <button class="btn btn-primary">Jogar</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Lucky Fortune</h3>
+                        <p class="game-provider">PG Soft</p>
+                        <button class="play-now">Jogar Agora</button>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-img" style="background-image: url('/api/placeholder/300/180')">
+                        <div class="game-overlay">
+                            <button class="btn btn-primary">Jogar</button>
+                        </div>
+                    </div>
+                    <div class="game-content">
+                        <h3 class="game-title">Dragon's Gold</h3>
+                        <p class="game-provider">PG Soft</p>
+                        <button class="play-now">Jogar Agora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="promotions">
+        <div class="container">
+            <h2 class="section-title">Promoções Imperdíveis</h2>
+            <div class="promo-cards">
+                <div class="promo-card">
+                    <div class="promo-img" style="background-image: url('imagens/banner1.png')"></div>
+                    <div class="promo-content">
+                        <h3 class="promo-title">Bônus de Boas-vindas</h3>
+                        <p class="promo-desc">Ganhe até R$2.000 + 200 rodadas grátis no seu primeiro depósito!</p>
+                        <button class="claim-btn">Reclamar Agora</button>
+                    </div>
+                </div>
+
+                <div class="promo-card">
+                    <div class="promo-img" style="background-image: url('imagens/banner2.png')"></div>
+                    <div class="promo-content">
+                        <h3 class="promo-title">Cashback Semanal</h3>
+                        <p class="promo-desc">Receba de volta 15% de suas perdas todas as semanas, sem condições!</p>
+                        <button class="claim-btn">Reclamar Agora</button>
+                    </div>
+                </div>
+
+                <div class="promo-card">
+                    <div class="promo-img" style="background-image: url('imagens/banner3.png')"></div>
+                    <div class="promo-content">
+                        <h3 class="promo-title">Torneio Semanal</h3>
+                        <p class="promo-desc">Prêmio de R$50.000 para os melhores jogadores da semana!</p>
+                        <button class="claim-btn">Participar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="payment-methods">
+        <div class="container">
+            <h2 class="section-title">Métodos de Pagamento</h2>
+            <div class="methods-container">
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/a65c5d1c5e556c6197f8fbd607482372" alt="Visa" />
+                </div>
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/95d849253f75d5e6e6b867af4f7c65aa"
+                        alt="Mastercard" />
+                </div>
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/5ee8fb5f33fdf1e42ea32b86f47f54c4" alt="PIX" />
+                </div>
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/br-11134258-7r98o-lxsovyseln7jc5"
+                        alt="Bitcoin" />
+                </div>
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/285e5ab6207eb562a9e893a42ff7ee46"
+                        alt="Ethereum" />
+                </div>
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/44734b7fc343eb46237c2d90c6c9ca60"
+                        alt="PayPal" />
+                </div>
+                <div class="payment-icon">
+                    <img src="https://down-br.img.susercontent.com/file/2a2cfeb34b00ef7b3be23ea516dcd1c5"
+                        alt="Boleto" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HonestBET</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Termos e Condições</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Jogo Responsável</a></li>
+                        <li><a href="#">Afiliados</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Jogos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Slots</a></li>
+                        <li><a href="#">Cassino ao Vivo</a></li>
+                        <li><a href="#">Roleta</a></li>
+                        <li><a href="#">Blackjack</a></li>
+                        <li><a href="#">Baccarat</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Central de Ajuda</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Chat ao Vivo</a></li>
+                        <li><a href="#">Reclamações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Segurança</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Jogo Responsável</a></li>
+                        <li><a href="#">Criptografia SSL</a></li>
+                        <li><a href="#">Verificação de Identidade</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 HonestBET. Todos os direitos reservados.</p>
+                <p>HonestBET é operado pelo Banco Central do Brasil, registrado em Brazil sob o número 00101235548.
+                </p>
+                <p>Nosso site utiliza criptografia SSL de 256 bits para proteger suas informações pessoais e
+                    financeiras.</p>
+                <p>A HonestBET promove o jogo responsável. Se você sentir que tem um problema com jogo, procure ajuda em
+                    <a href="https://www.reclameaqui.com.br/">Suporte</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Support -->
+    <div class="chat-support">
+        <div class="chat-button">
+            <img src="imagens/suporte.png" alt="Chat Support" width="30" height="30">
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
+            <h2 class="modal-title">Entrar</h2>
+            <form>
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="Seu email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Senha</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="Sua senha">
+                </div>
+                <button type="submit" class="submit-btn">Entrar</button>
+            </form>
+            <div class="social-login">
+                <h3 class="social-login-title">Ou entre com</h3>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn"><img src="imagens/facebook.png" alt="Facebook" width="20"
+                            height="20"></a>
+                    <a href="#" class="social-btn"><img src="imagens/google.png" alt="Google" width="20"
+                            height="20"></a>
+                    <a href="#" class="social-btn"><img src="imagens/twitter.png" alt="Twitter" width="20"
+                            height="20"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('register-modal')">&times;</span>
+            <h2 class="modal-title">Cadastrar</h2>
+            <form>
+                <div class="form-group">
+                    <label for="register-name" class="form-label">Nome</label>
+                    <input type="text" id="register-name" class="form-input" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="register-email" class="form-label">Email</label>
+                    <input type="email" id="register-email" class="form-input" placeholder="Seu email">
+                </div>
+                <div class="form-group">
+                    <label for="register-password" class="form-label">Senha</label>
+                    <input type="password" id="register-password" class="form-input" placeholder="Sua senha">
+                </div>
+                <button type="submit" class="submit-btn">Cadastrar</button>
+            </form>
+            <div class="social-login">
+                <h3 class="social-login-title">Ou cadastre-se com</h3>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn"><img src="imagens/facebook.png" alt="Facebook" width="20"
+                            height="20"></a>
+                    <a href="#" class="social-btn"><img src="imagens/google.png" alt="Google" width="20"
+                            height="20"></a>
+                    <a href="#" class="social-btn"><img src="imagens/twitter.png" alt="Twitter" width="20"
+                            height="20"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
